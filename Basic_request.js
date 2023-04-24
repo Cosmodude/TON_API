@@ -1,9 +1,9 @@
 const axios = require('axios').default;
-require('dotenv').config();
+const dotenv = require('dotenv').config();
 
 serverSideKey = process.env.ServerSideKey; 
 const exampleURL = 'https://swapi.dev/api/';
-const tonapi = "https://tonapi.io/v2/blockchain/validators";
+const tonapi = "https://tonapi.io/v1/blockchain/validators";
 
 headers = { 'Authorization': 'Bearer ' + serverSideKey };
 const getValidators = () => {
