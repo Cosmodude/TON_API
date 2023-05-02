@@ -1,11 +1,15 @@
-const axios = require('axios').default;
-const dotenv = require('dotenv').config();
+import axios from "axios";
+import { load } from 'ts-dotenv';
 
-serverSideKey = process.env.ServerSideKey; 
+const env = load({
+    ServerSideKey: String,
+})
+
+const serverSideKey = env.ServerSideKey; 
 const exampleURL = 'https://swapi.dev/api/';
 const tonapi = "https://tonapi.io/v1/blockchain/validators";
 
-headers = { 'Authorization': 'Bearer ' + serverSideKey };
+const headers = { 'Authorization': 'Bearer ' + serverSideKey };
 const getValidators = () => {
     return axios.get(tonapi, { headers: headers });
 }
