@@ -61,12 +61,12 @@ var getValidators = function () {
     });
 };
 //const response = axios.get(URL + "starships");
-console.log(getValidators());
-/*.then(res => {
+getValidators()
+    .then(function (res) {
     //console.log(res.data);
-    console.log(res.data.validators.length);
-    console.log(res.data.validators[res.data.validators.length - 1]);
+    console.log(res["validators"].length);
+    //console.log(res.data.validators[res.data.validators.length - 1]);
 })
-.catch(err => {
+    .catch(function (err) {
     console.log("Error", err);
-})*/
+});
