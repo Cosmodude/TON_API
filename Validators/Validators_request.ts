@@ -1,11 +1,26 @@
 import axios from "axios";
 import { load } from 'ts-dotenv';
 import { DataSource, Repository } from 'typeorm';
+import { Pool } from './pool.entity';
+import { ValidatorsDataSource } from './Validators_DataSource'
 
 const env = load({
     ServerSideKey: String,
-})
+});
 
+const DBAccess = {
+    async getOurValidatorsAdresses() {
+        const ourValidators = await ValidatorsDataSource
+            .getRepository(Pool)
+            .createQueryBuilder("pool")
+            .getMany();
+        const adrresses = [];
+        for (let validator in ourValidators) {
+            adrresses.push(validator["address"]);
+        }
+        return adrresses;
+    }
+}
 
 const serverSideKey = env.ServerSideKey; 
 const exampleURL = 'https://swapi.dev/api/';
@@ -39,3 +54,5 @@ getValidators()
     .catch(err => {
         console.log("Error", err);
     })
+
+    console.log(DBAccess.getOurValidatorsAdresses())
