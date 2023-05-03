@@ -1,9 +1,11 @@
 import axios from "axios";
 import { load } from 'ts-dotenv';
+import { DataSource, Repository } from 'typeorm';
 
 const env = load({
     ServerSideKey: String,
 })
+
 
 const serverSideKey = env.ServerSideKey; 
 const exampleURL = 'https://swapi.dev/api/';
