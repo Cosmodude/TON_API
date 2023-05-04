@@ -9,7 +9,7 @@ const env = load({
     DB_NAME: String,
 });
 
-const AppDataSource = new DataSource({
+export const ValidatorsDataSource = new DataSource({
     type: 'mysql',
     host: env.DB_HOST,
     port: 3306,
@@ -17,9 +17,10 @@ const AppDataSource = new DataSource({
     password: env.DB_PASSWORD,
     database: env.DB_NAME,
     entities: [Pool],
+    synchronize: false,
 })
 
-AppDataSource.initialize()
+ValidatorsDataSource.initialize()
     .then(() => {
         console.log("Data Source has been initialized!")
     })
