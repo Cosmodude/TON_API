@@ -1,7 +1,7 @@
 import axios from "axios";
 import { load } from 'ts-dotenv';
 import { DataSource, Repository } from 'typeorm';
-import { Pool } from './pool.entity';
+import { Pool } from './entity/pool.entity';
 import { ValidatorsDataSource } from './Validators_DataSource'
 
 const env = load({

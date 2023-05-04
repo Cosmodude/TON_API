@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm"
 import { load } from 'ts-dotenv';
-import { Pool } from './pool.entity';
+import { Pool } from './entity/pool.entity';
 
 const env = load({
     DB_USER: String,
