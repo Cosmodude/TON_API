@@ -8,19 +8,18 @@ const env = load({
     ServerSideKey: String,
 });
 
-const DBAccess = {
-    async getOurValidatorsAdresses() {
-        const ourValidators = await ValidatorsDataSource
-            .getRepository(Pool)
-            .createQueryBuilder("pool")
-            .getMany();
-        const adrresses = [];
-        for (let validator in ourValidators) {
-            adrresses.push(validator["address"]);
-        }
-        return adrresses;
+
+async function getOurValidatorsAdresses() {
+    const ourValidators = await ValidatorsDataSource
+        .manager
+        .find(Pool)
+    const adrresses = [];
+    for (let validator in ourValidators) {
+        adrresses.push(validator["address"]);
     }
+    return adrresses;
 }
+
 
 const serverSideKey = env.ServerSideKey; 
 const exampleURL = 'https://swapi.dev/api/';
@@ -28,8 +27,8 @@ const tonapiURL = "https://tonapi.io/v1/blockchain/validators";
 type GetResponse = {
     data:[]
 }
-
 console.log(exampleURL);
+
 const headers = { 'Authorization': 'Bearer ' + serverSideKey, Accept: 'application/json' };
 
 const getValidators = async function () {
@@ -46,13 +45,13 @@ const validatorsAdrresses = [
 getValidators()
     .then(res => {
         console.log(res["validators"][1]["address"])
-        const ourValidators = res["validators"].filter(validator =>  validatorsAdrresses.includes(validator["address"]));
+        const ourValidatorsData = res["validators"].filter(validator =>  validatorsAdrresses.includes(validator["address"]));
         //console.log(res["validators"]);
-        console.log(ourValidators);
+        console.log(ourValidatorsData);
         //console.log(res.data.validators[res.data.validators.length - 1]);
     })
     .catch(err => {
         console.log("Error", err);
     })
 
-    console.log(DBAccess.getOurValidatorsAdresses())
+    console.log(getOurValidatorsAdresses())
