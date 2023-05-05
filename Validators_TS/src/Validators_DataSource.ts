@@ -16,7 +16,7 @@ export const ValidatorsDataSource = new DataSource({
     username: env.DB_USER,
     password: env.DB_PASSWORD,
     database: env.DB_NAME,
-    entities: ["entity/*.ts"],
+    entities: ["./entity/*.ts"],
     synchronize: false,
 })
 
