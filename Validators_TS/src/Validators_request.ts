@@ -10,6 +10,7 @@ const env = load({
 
 
 async function getOurValidatorsAdresses() {
+    await ValidatorsDataSource.initialize();
     const ourValidators = await ValidatorsDataSource
         .manager
         .find(Pool)
@@ -17,7 +18,8 @@ async function getOurValidatorsAdresses() {
     for (let validator in ourValidators) {
         adrresses.push(validator["address"]);
     }
-    return adrresses;
+    console.log(ourValidators);
+    console.log( adrresses);
 }
 
 
@@ -44,14 +46,18 @@ const validatorsAdrresses = [
 //const response = axios.get(URL + "starships");
 getValidators()
     .then(res => {
-        console.log(res["validators"][1]["address"])
+        //console.log(res["validators"][1]["address"])
         const ourValidatorsData = res["validators"].filter(validator =>  validatorsAdrresses.includes(validator["address"]));
         //console.log(res["validators"]);
-        console.log(ourValidatorsData);
+        //console.log(ourValidatorsData);
         //console.log(res.data.validators[res.data.validators.length - 1]);
     })
     .catch(err => {
         console.log("Error", err);
     })
 
-    console.log(getOurValidatorsAdresses())
+//const pool = new Pool();
+//pool.name = "Vlad";
+//console.log(pool);
+
+getOurValidatorsAdresses();
