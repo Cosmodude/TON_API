@@ -12,5 +12,4 @@
       "experimentalDecorators": true,
       "sourceMap": true,
    },
-   "entities": [ "./src/entity/*.ts"]
 }
